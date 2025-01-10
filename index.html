@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>daseart.co</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        .email-form {
+            margin-top: 1rem;
+            display: none;
+            animation: slideDown 0.5s ease forwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        input[type="email"],
+        input[name="subject"],
+        textarea {
+            padding: 10px;
+            font-size: 1rem;
+            width: 80%;
+            max-width: 300px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .language-selector {
+            margin-top: 10px;
+        }
+
+        select {
+            padding: 5px 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+    <script>
+        const translations = {
+            en: {
+                title: "Welcome to daseart.co",
+                message: "We are glad to have you here. If you'd like to get in touch, click the button below:",
+                contactButton: "Contact Us",
+                emailPlaceholder: "Your email address",
+                subjectPlaceholder: "Subject",
+                messagePlaceholder: "Your message",
+                sendButton: "Send Email"
+            },
+            tr: {
+                title: "daseart.co'ya hoş geldiniz",
+                message: "Burada olduğunuz için mutluyuz. Bizimle iletişime geçmek isterseniz aşağıdaki butona tıklayın:",
+                contactButton: "Bize Ulaşın",
+                emailPlaceholder: "E-posta adresiniz",
+                subjectPlaceholder: "Konu",
+                messagePlaceholder: "Mesajınız",
+                sendButton: "E-posta Gönder"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const texts = translations[lang];
+            document.querySelector('h1').innerText = texts.title;
+            document.querySelector('p').innerText = texts.message;
+            document.querySelector('.contact-btn').innerText = texts.contactButton;
+            document.querySelector('input[name="from"]').placeholder = texts.emailPlaceholder;
+            document.querySelector('input[name="subject"]').placeholder = texts.subjectPlaceholder;
+            document.querySelector('textarea[name="body"]').placeholder = texts.messagePlaceholder;
+            document.querySelector('.send-btn').innerText = texts.sendButton;
+        }
+
+        function showForm() {
+            const form = document.querySelector('.email-form');
+            form.style.display = 'block';
+        }
+
+        function formatMailto() {
+            const emailField = document.querySelector('input[name="from"]');
+            const subjectField = document.querySelector('input[name="subject"]');
+            const messageField = document.querySelector('textarea[name="body"]');
+
+            const subject = encodeURIComponent(subjectField.value);
+            const message = encodeURIComponent(messageField.value);
+
+            const mailtoLink = `mailto:info@osmanesad.com?subject=${subject}&body=${message}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="language-selector">
+            <label for="language">Language: </label>
+            <select id="language" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="tr">Türkçe</option>
+            </select>
+        </div>
+        <h1>Welcome to daseart.co</h1>
+        <p>We are glad to have you here. If you'd like to get in touch, click the button below:</p>
+        <button class="contact-btn" onclick="showForm()">Contact Us</button>
+        <div class="email-form">
+            <form onsubmit="event.preventDefault(); formatMailto();">
+                <input type="email" name="from" placeholder="Your email address" required>
+                <br>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <br>
+                <textarea name="body" placeholder="Your message" required></textarea>
+                <br>
+                <button class="send-btn" type="submit">Send Email</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
