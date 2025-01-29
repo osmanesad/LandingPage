@@ -28,6 +28,28 @@
         h1 {
             font-size: 3rem;
             margin: 0;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #fff;
+            width: 0;
+            animation: typing 2s steps(10, end) forwards, blink 0.8s infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
         }
 
         .subtext {
@@ -68,12 +90,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #ffffff;
+            background: #fff;
             padding: 40px;
-            border-radius: 0px;
+            border-radius: 8px;
             color: #000;
             width: 90%;
-            max-width: 240px;
+            max-width: 500px;
             box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
@@ -135,8 +157,16 @@
             const mailtoLink = `mailto:info@osmanesad.com?subject=${subject}&body=${message}`;
             window.location.href = mailtoLink;
         }
+        function startTypingEffect() {
+            const h1 = document.querySelector('h1');
+            h1.style.width = '0';
+            h1.style.animation = 'none';
+            void h1.offsetWidth;
+            h1.style.animation = 'typing 2s steps(10, end) forwards, blink 0.8s infinite';
+        }
         window.onload = function () {
             document.querySelector('.email-form').style.display = 'none';
+            setInterval(startTypingEffect, 10000);
         };
     </script>
 </head>
@@ -150,14 +180,13 @@
     <div class="email-form">
         <button class="close-btn" onclick="closeForm()">×</button>
         <form onsubmit="formatMailto(event)">
-            <h3>What do you thing?</h3>
             <input type="email" name="from" placeholder="Your email address" required>
             <br>
             <input type="text" name="subject" placeholder="Subject" required>
             <br>
             <textarea name="body" placeholder="Your message" required></textarea>
             <br>
-            <button class="send-btn" type="submit">Send Email →</button>
+            <button class="send-btn" type="submit">Send Email</button>
         </form>
     </div>
 </body>
