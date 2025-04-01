@@ -156,7 +156,7 @@
         const subject = encodeURIComponent(subjectField);
         const message = encodeURIComponent(messageField);
 
-        const mailtoLink = `mailto:info@coffeeandbook.co?subject=${subject}&body=${message}`;
+        const mailtoLink = `mailto:info@pagebrew.co?subject=${subject}&body=${message}`;
         window.location.href = mailtoLink;
       }
 
@@ -182,7 +182,8 @@
     <div class="email-form">
       <button class="close-btn" onclick="closeForm()">×</button>
       <form onsubmit="formatMailto(event)">
-        <p>Contact us.</p>
+        <h3>Contact us.</h3>
+        <p>we are coffeeandbook.co & pagebrew.co</p>
         <input type="email" name="from" placeholder="Your email address" required />
         <br />
         <input type="text" name="subject" placeholder="Subject" required />
